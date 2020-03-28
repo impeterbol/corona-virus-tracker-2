@@ -1,0 +1,95 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#back2Top {
+    width: 55px;
+    line-height: 55px;
+    overflow: hidden;
+    z-index: 999;
+    display: none;
+    cursor: pointer;
+    -moz-transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+    position: fixed;
+    bottom: 200px;
+    right: 0;
+    background-color: #DDD;
+    color: #555;
+    text-align: center;
+    font-size: 30px;
+    text-decoration: none;
+}
+
+#back2Top:hover {
+    background-color: #DDF;
+    color: #000;
+}
+
+.tableFixHead {
+    overflow-y: auto;
+    height: 300px;
+}
+
+table {
+    border-spacing: 10px;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: small;
+}
+
+table td {
+    border: 1px solid rgb(218, 215, 215);
+}
+
+footer {
+    border-top: 3px solid #4aaaa5;
+    background-color: #666666;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #ffffff;
+}
+
+
+/* Prayer styling */
+
+#prayersJumbotron {
+    background-image: url(../img/row_of_candles.jpg);
+    font-family: "Arial black";
+    font-size: 400%;
+    color: ivory;
+}
+
+
+/* #prayerForm {
+    width: 90vw;
+    margin-top: 5%;
+}
+
+.prayer {
+    padding: 1%;
+    border-bottom: black solid 1px;
+}
+
+.prayerContainer {
+    padding: 3%;
+    display: flex;
+    justify-content: center;
+}
+
+#prevPrayers {
+    width: 90vw
+} */
+
+
+/* next prayer button */
+
+
+/* #next {
+    margin-top: 1%;
+    background-color: green;
+    color: green
+} */
