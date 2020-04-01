@@ -8,34 +8,6 @@ var env = process.env.NODE_ENV || "development";
 var config = require(__dirname + "/../config/config.json")[env];
 var db = {};
 
-
-/*
-var env = 'data'
-
-var configJSON = {
-    data: {
-        item: 5
-    },
-    user: {
-        name: 'Gil'
-    }
-}
-
-            (configJSON.data)
-var config = configJSON[env]
-
-if(config.item){
-    then must be inside data object
-    env === data
-}
-
-if(config.name){
-    then must be inside user object
-    env === user
-}
-
-*/
-
 if (config.use_env_variable) {
     var sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {

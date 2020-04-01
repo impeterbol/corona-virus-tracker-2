@@ -5,13 +5,14 @@ if (window.location.pathname === "/") {
 
 
 function showBiz() {
-    /* global moment */
 
     // businessContainer holds all daat
-
-    $.get("/api/categories", function (data) {
-        console.log("Categories", data);
-        console.log(data)
+    $.get("/api/seeding", function(data) {
+        // console.log("here!!!!!!!!!!!"); 
+    });
+    $.get("/api/categories", function(data) {
+        // console.log("Categories", data);
+        // console.log(data)
         $(".business-container").append(arrayToTable(data));
     })
 
@@ -42,13 +43,13 @@ function arrayToTable(tableData) {
                 name.attr("target", "_blank")
             } else {
                 name.attr("href", "#")
-                name.onclick = function () { return false }
+                name.onclick = function() { return false }
             }
 
             var text = $("<p>").text(place.text)
 
             placeContainer.append(name, text)
-            item.append(placeContainer)            
+            item.append(placeContainer)
         }
 
         container.append(item)
