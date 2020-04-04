@@ -3,7 +3,7 @@ if (window.location.pathname === "/prayers") {
     let offset = 0;
 
     //Add button
-    $("#prayerSubmit").on("click", function(event) {
+    $("#prayerForm").on("submit", function(event) {
         event.preventDefault();
 
         //new prayer
@@ -18,6 +18,15 @@ if (window.location.pathname === "/prayers") {
                 .val()
                 .trim()
         };
+        // var keys = Object.keys(newPrayer)
+        // console.log(keys)
+        // for (var i = 0; i < keys.length; i++) {
+        //     var key = keys[i];
+        //     if (newPrayer[key] === "") {
+        //         alert("Didn't enter", key)
+        //         return false
+        //     }
+        // }
 
         //   console.log(newPrayer);
 
@@ -30,6 +39,7 @@ if (window.location.pathname === "/prayers") {
             row.append("<p>" + "- " + newPrayer.Name + " from " + newPrayer.Location + "</p>");
             $("#prayerArea").prepend(row);
         });
+
         //clear fields
         $("#name").val("");
         $("#location").val("");
@@ -56,11 +66,11 @@ if (window.location.pathname === "/prayers") {
         });
     }
 
-    $("#before").on("click",()=>{
-        offset-=LIMIT;
+    $("#before").on("click", () => {
+        offset -= LIMIT;
         getPrayers(LIMIT, offset);
     });
-    
+
     $("#next").on("click", function() {
         offset += LIMIT;
         getPrayers(LIMIT, offset);

@@ -1,7 +1,8 @@
 if (window.location.pathname === "/") {
     const LIMIT = 100;
     let pageIndex = 0;
-    let TABLE_DATA = []
+    let TABLE_DATA = [];
+    let header = {}
 
 
 
@@ -52,39 +53,47 @@ if (window.location.pathname === "/") {
         const searchUrl = `https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/${searchDate}.csv`;
         console.log(date);
         $.get(searchUrl).then(function(results) {
-            TABLE_DATA = results.split("\n")
+            const demo = results.split("\n").map(row => row.split(",")).map((cols, i) => ({
+                City: cols[1],
+                State: cols[2],
+                Country: cols[3],
+                updated: i === 0 ? cols[4] : moment(cols[4]).format("M.D.YY"),
+                confirmed: cols[7],
+                deaths: cols[8],
+                recovered: cols[9],
+                active: cols[10]
+            }))
+            header = demo.shift()
+            TABLE_DATA = demo;
+
+            console.log(header)
+            console.log(demo)
             arrayToTable()
         });
-        //dataForToday();
-
-        function dataForToday() {
-            Papa.parse(searchUrl, {
-                download: true,
-                complete: function(results) {
-                    $("#today").append(arrayToTable(results.data));
-                    scrollToTable();
-                }
-            });
-        }
 
         //end scrolling to the results for mobile
     }
 
     $("#moreTable").on("click", function() {
-        pageIndex + LIMIT;
+        pageIndex += LIMIT;
         arrayToTable()
+        console.log("click")
     })
 
     //adding data to the table
     function arrayToTable() {
         $("#today").html('');
         var table = $('<table id="tableFixHead"></table>');
+        var row = $("<tr></tr>");
+        Object.keys(header).forEach(function(key) {
+            row.append($("<td>" + header[key] + "</td>"));
+        })
+        table.append(row);
         for (var i = pageIndex; i < pageIndex + LIMIT; i++) {
-            const element = TABLE_DATA[i];
             var row = $("<tr></tr>");
-            var rowData = element.split(",");
-            rowData.forEach(function(cellData) {
-                row.append($("<td>" + cellData + "</td>"));
+            var rowData = TABLE_DATA[i];
+            Object.keys(rowData).forEach(function(key) {
+                row.append($("<td>" + rowData[key] + "</td>"));
             });
             table.append(row);
         }
@@ -96,7 +105,7 @@ if (window.location.pathname === "/") {
         //     table.append(row);
         //   });
         $("#today").append(table);
-        scrollToTable()
+        //scrollToTable()
     }
     //scrolling to the results for mobile
     function scrollToTable() {
